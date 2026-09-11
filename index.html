@@ -193,7 +193,7 @@
                         <tr>
                             <th scope="col" class="p-3.5 w-12 text-center">#</th>
                             <th scope="col" class="p-3.5">Nome do Técnico</th>
-                            <th scope="col" class="p-3.5">Observação / Último Motivo Registrado</th>
+                            <th scope="col" class="p-3.5">Observação / Motivos Registrados</th>
                             <th scope="col" class="p-3.5 text-center w-48 no-print">Ações</th>
                         </tr>
                     </thead>
@@ -318,6 +318,8 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
 
     <!-- Modal: Relatório Mensal por Mês -->
     <div id="modal-monthly-report" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4 no-print">
@@ -479,12 +481,21 @@
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-zinc-800/40 transition border-b border-zinc-800/40";
 
-                const latestObs = getLatestObservation(tech.id, monthVal);
+                const techRecords = getFilteredObservations(tech.id, monthVal);
                 const monthInfoText = monthVal ? ` <span class="text-[10px] text-brand-400 font-mono">(${formatMonthName(monthVal)})</span>` : '';
                 
-                const obsText = latestObs 
-                    ? `<span class="text-zinc-200 font-medium">${latestObs.obs}</span> <span class="text-[10px] text-zinc-500 ml-1">(${formatDate(latestObs.date)})</span>`
-                    : `<span class="text-zinc-600 italic">Sem ocorrências registradas${monthInfoText}</span>`;
+                let obsHtml = '';
+                if (techRecords.length > 0) {
+                    obsHtml = `<div class="space-y-1.5 py-1">` + techRecords.map(r => `
+                        <div class="text-xs border-b border-zinc-800/40 pb-1 last:border-0 last:pb-0">
+                            <span class="text-zinc-200 font-medium">${escapeHtml(r.obs)}</span> 
+                            <span class="text-[10px] text-zinc-400 font-mono ml-1">(${formatDate(r.date)})</span>
+                            <span class="text-[10px] text-brand-400 ml-1 font-semibold">[${escapeHtml(r.status)}]</span>
+                        </div>
+                    `).join('') + `</div>`;
+                } else {
+                    obsHtml = `<span class="text-zinc-600 italic">Sem ocorrências registradas${monthInfoText}</span>`;
+                }
 
                 tr.innerHTML = `
                     <td class="p-3.5 text-center text-zinc-500 font-mono text-[11px] print-text">${index + 1}</td>
@@ -492,7 +503,7 @@
                         ${escapeHtml(tech.name)}
                         <div class="text-[10px] font-normal text-zinc-400 print-text">${escapeHtml(tech.cargo || 'Técnico de Campo')}</div>
                     </td>
-                    <td class="p-3.5 print-text">${obsText}</td>
+                    <td class="p-3.5 print-text">${obsHtml}</td>
                     <td class="p-3.5 text-center space-x-1 no-print">
                         <button onclick="quickRecordPoint('${tech.id}')" title="Lançar Ocorrência" class="px-2.5 py-1 text-xs bg-brand-950 hover:bg-brand-900 text-brand-300 border border-brand-800/60 rounded-lg transition font-medium">
                             <i class="fa-solid fa-plus-circle mr-1"></i> Ocorrência
@@ -512,14 +523,13 @@
             });
         }
 
-        function getLatestObservation(techId, monthVal = '') {
+        function getFilteredObservations(techId, monthVal = '') {
             let techRecords = pointRecords.filter(r => r.techId === techId && r.obs && r.obs.trim() !== '');
             if (monthVal) {
                 techRecords = techRecords.filter(r => r.date && r.date.startsWith(monthVal));
             }
-            if (techRecords.length === 0) return null;
-            techRecords.sort((a, b) => new Date(b.date) - new Date(a.date));
-            return techRecords[0];
+            techRecords.sort((a, b) => new Date(a.date) - new Date(b.date));
+            return techRecords;
         }
 
         function filterTechnicians() {
