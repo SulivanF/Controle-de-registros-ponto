@@ -39,14 +39,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #09090b;
             color: #f4f4f5;
         }
-        
         /* Estilização da barra de rolagem */
         ::-webkit-scrollbar {
             width: 8px;
@@ -62,7 +60,6 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #3f3f46;
         }
-
         /* Estilos de Impressão */
         @media print {
             .no-print {
@@ -109,18 +106,15 @@
                     <p class="text-xs text-zinc-400">Controle de Ocorrências e Divergências</p>
                 </div>
             </div>
-
             <div class="flex items-center gap-2 sm:gap-3">
-                <button onclick="openModalMonthlyReport()" class="px-3 py-2 text-xs font-semibold bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded-lg transition-all flex items-center gap-2">
-                    <i class="fa-solid fa-calendar-days text-brand-400"></i>
-                    <span class="hidden sm:inline">Relatório Mensal</span>
+                <button onclick="openModalWeeklyReport()" class="px-3 py-2 text-xs font-semibold bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded-lg transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-calendar-week text-brand-400"></i>
+                    <span class="hidden sm:inline">Relatório Semanal</span>
                 </button>
-
                 <button onclick="openModalTechnician()" class="px-3.5 py-2 text-xs font-semibold bg-brand-600 hover:bg-brand-500 text-white rounded-lg transition-all flex items-center gap-2 shadow-md shadow-brand-950/30">
                     <i class="fa-solid fa-user-plus"></i>
                     <span class="hidden sm:inline">Novo Colaborador</span>
                 </button>
-
                 <button onclick="printReport()" class="px-3 py-2 text-xs font-medium bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded-lg transition-all flex items-center gap-2">
                     <i class="fa-solid fa-print"></i>
                     <span class="hidden sm:inline">Imprimir</span>
@@ -131,7 +125,7 @@
 
     <!-- Main Content Area -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
-
+        
         <!-- Stat Cards Summary -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 no-print">
             <div class="bg-zinc-900 border border-zinc-800/80 rounded-xl p-4 flex items-center justify-between">
@@ -143,7 +137,6 @@
                     <i class="fa-solid fa-users text-xl"></i>
                 </div>
             </div>
-
             <div class="bg-zinc-900 border border-zinc-800/80 rounded-xl p-4 flex items-center justify-between">
                 <div>
                     <p class="text-xs font-medium text-zinc-400" id="occurrences-card-label">Ocorrências / Divergências Registradas</p>
@@ -162,16 +155,12 @@
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400 text-xs"></i>
                     <input type="text" id="search-input" oninput="filterTechnicians()" placeholder="Buscar colaborador..." class="w-full pl-9 pr-4 py-2 text-xs bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-brand-500 transition">
                 </div>
-
                 <div class="flex items-center gap-2 w-full sm:w-auto">
-                    <label class="text-xs text-zinc-400 whitespace-nowrap"><i class="fa-solid fa-filter text-brand-400 mr-1"></i> Mês:</label>
-                    <input type="month" id="month-filter" onchange="filterTechnicians()" class="px-3 py-1.5 text-xs bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 focus:outline-none focus:ring-2 focus:ring-brand-500 transition">
-                    <button onclick="clearMonthFilter()" title="Limpar filtro de mês" class="px-2.5 py-1.5 text-xs bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700 rounded-lg transition">
-                        Todos
-                    </button>
+                    <label class="text-xs text-zinc-400 whitespace-nowrap"><i class="fa-solid fa-filter text-brand-400 mr-1"></i> Semana:</label>
+                    <input type="week" id="week-filter" onchange="filterTechnicians()" class="px-3 py-1.5 text-xs bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 focus:outline-none focus:ring-2 focus:ring-brand-500 transition">
+                    <button onclick="clearWeekFilter()" title="Limpar filtro de semana" class="px-2.5 py-1.5 text-xs bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700 rounded-lg transition"> Todos </button>
                 </div>
             </div>
-
             <div class="text-xs text-zinc-400 w-full sm:w-auto text-right">
                 Exibindo colaboradores em <span class="text-zinc-200 font-semibold">ordem alfabética</span>
             </div>
@@ -181,12 +170,10 @@
         <div class="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden shadow-xl print-card">
             <div class="p-4 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/50">
                 <h2 class="font-bold text-sm text-white flex items-center gap-2">
-                    <i class="fa-solid fa-list-check text-brand-500"></i>
-                    Lista de Colaboradores Técnicos
+                    <i class="fa-solid fa-list-check text-brand-500"></i> Lista de Colaboradores Técnicos
                 </h2>
                 <span id="tech-count-badge" class="px-2.5 py-0.5 text-xs bg-zinc-800 text-zinc-300 rounded-full font-mono border border-zinc-700">0 técnicos</span>
             </div>
-
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs text-zinc-300">
                     <thead class="bg-zinc-950 text-zinc-400 font-semibold uppercase tracking-wider text-[11px] border-b border-zinc-800">
@@ -203,6 +190,7 @@
                 </table>
             </div>
         </div>
+
     </main>
 
     <!-- Modal: Adicionar/Editar Técnico -->
@@ -243,19 +231,16 @@
             </div>
             <form id="form-point" onsubmit="savePointRecord(event)" class="p-5 space-y-4">
                 <input type="hidden" id="record-id">
-                
                 <div>
                     <label class="block text-xs font-semibold text-zinc-300 mb-1">Selecione o Técnico *</label>
                     <select id="record-tech-id" required class="w-full px-3 py-2 text-xs bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 focus:ring-2 focus:ring-brand-500 focus:outline-none">
                         <!-- Dynamic options loaded via JS -->
                     </select>
                 </div>
-
                 <div>
                     <label class="block text-xs font-semibold text-zinc-300 mb-1">Data *</label>
                     <input type="date" id="record-date" required class="w-full px-3 py-2 text-xs bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 focus:ring-2 focus:ring-brand-500 focus:outline-none">
                 </div>
-
                 <div>
                     <label class="block text-xs font-semibold text-zinc-300 mb-1">Situação / Tipo da Ocorrência *</label>
                     <select id="record-status" onchange="togglePresetTags()" class="w-full px-3 py-2 text-xs bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 focus:ring-2 focus:ring-brand-500 focus:outline-none">
@@ -264,7 +249,6 @@
                         <option value="Justificado divergência de horário">⚠️ Justificado divergência de horário</option>
                     </select>
                 </div>
-
                 <div>
                     <label class="block text-xs font-semibold text-zinc-300 mb-1">Atalhos de Motivos Frequentes</label>
                     <div class="flex flex-wrap gap-1.5 mb-2">
@@ -281,7 +265,6 @@
                     <label class="block text-xs font-semibold text-zinc-300 mb-1">Observação / Detalhamento do Motivo *</label>
                     <textarea id="record-obs" rows="3" placeholder="Descreva detalhadamente o motivo do ponto fora da cerca ou divergência..." required class="w-full px-3 py-2 text-xs bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 focus:ring-2 focus:ring-brand-500 focus:outline-none resize-none"></textarea>
                 </div>
-
                 <div class="flex justify-end gap-2 pt-2 border-t border-zinc-800">
                     <button type="button" onclick="closeModalPointRecord()" class="px-4 py-2 text-xs font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition">Cancelar</button>
                     <button type="submit" class="px-4 py-2 text-xs font-semibold bg-brand-600 hover:bg-brand-500 text-white rounded-lg transition shadow-md shadow-brand-950/30">Salvar Registro</button>
@@ -302,7 +285,6 @@
                 </div>
                 <button onclick="closeModalHistory()" class="text-zinc-400 hover:text-white transition"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-            
             <div class="p-4 max-h-[60vh] overflow-y-auto">
                 <table class="w-full text-left text-xs">
                     <thead class="bg-zinc-950 text-zinc-400 font-semibold border-b border-zinc-800">
@@ -321,39 +303,36 @@
         </div>
     </div>
 
-    <!-- Modal: Relatório Mensal por Mês -->
-    <div id="modal-monthly-report" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4 no-print">
+    <!-- Modal: Relatório Semanal por Semana -->
+    <div id="modal-weekly-report" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4 no-print">
         <div class="bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl max-w-4xl w-full overflow-hidden transform transition-all flex flex-col max-h-[90vh]">
             <div class="bg-gradient-to-r from-zinc-900 via-zinc-900 to-brand-950 p-4 border-b border-zinc-800 flex justify-between items-center">
                 <div class="flex items-center gap-2">
                     <i class="fa-solid fa-calendar-check text-brand-500 text-lg"></i>
                     <div>
-                        <h3 class="font-bold text-sm text-white">Relatório Mensal de Ocorrências</h3>
-                        <p class="text-xs text-zinc-400">Consolidado por mês de referência</p>
+                        <h3 class="font-bold text-sm text-white">Relatório Semanal de Ocorrências</h3>
+                        <p class="text-xs text-zinc-400">Consolidado por semana de referência</p>
                     </div>
                 </div>
-                <button onclick="closeModalMonthlyReport()" class="text-zinc-400 hover:text-white transition"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <button onclick="closeModalWeeklyReport()" class="text-zinc-400 hover:text-white transition"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-
             <div class="p-4 border-b border-zinc-800 bg-zinc-950 flex flex-wrap items-center justify-between gap-3">
                 <div class="flex items-center gap-2">
-                    <label class="text-xs font-medium text-zinc-300">Selecione o Mês:</label>
-                    <input type="month" id="report-month-select" onchange="renderMonthlyReport()" class="px-3 py-1.5 text-xs bg-zinc-900 border border-zinc-700 rounded-lg text-zinc-100 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    <label class="text-xs font-medium text-zinc-300">Selecione a Semana:</label>
+                    <input type="week" id="report-week-select" onchange="renderWeeklyReport()" class="px-3 py-1.5 text-xs bg-zinc-900 border border-zinc-700 rounded-lg text-zinc-100 focus:ring-2 focus:ring-brand-500 focus:outline-none">
                 </div>
                 <div class="flex items-center gap-2">
                     <span id="report-total-badge" class="px-3 py-1 text-xs bg-brand-950 text-brand-300 border border-brand-800/60 rounded-full font-medium">0 Ocorrências</span>
-                    <button onclick="printMonthlyReport()" class="px-3 py-1.5 text-xs font-medium bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded-lg transition flex items-center gap-1.5">
-                        <i class="fa-solid fa-print text-brand-400"></i> Imprimir Este Mês
+                    <button onclick="printWeeklyReport()" class="px-3 py-1.5 text-xs font-medium bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded-lg transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-print text-brand-400"></i> Imprimir Esta Semana
                     </button>
                 </div>
             </div>
-
-            <div class="p-4 overflow-y-auto flex-1 space-y-4" id="monthly-report-content">
-                <!-- Dynamic monthly report content loaded via JS -->
+            <div class="p-4 overflow-y-auto flex-1 space-y-4" id="weekly-report-content">
+                <!-- Dynamic weekly report content loaded via JS -->
             </div>
-
             <div class="p-3 bg-zinc-950 border-t border-zinc-800 flex justify-end">
-                <button onclick="closeModalMonthlyReport()" class="px-4 py-1.5 text-xs font-medium bg-zinc-800 hover:bg-zinc-700 text-zinc-200 rounded-lg transition">Fechar</button>
+                <button onclick="closeModalWeeklyReport()" class="px-4 py-1.5 text-xs font-medium bg-zinc-800 hover:bg-zinc-700 text-zinc-200 rounded-lg transition">Fechar</button>
             </div>
         </div>
     </div>
@@ -367,26 +346,11 @@
     <script>
         // Lista original dos 21 técnicos responsáveis
         const DEFAULT_TECHNICIANS = [
-            "Ederson Carvalho",
-            "Bruno Severes",
-            "Valdenor Sotoriva",
-            "Leonardo Longo",
-            "Mateus Mattos",
-            "Marcos Brandalize",
-            "Guilherme Stujk",
-            "Wellinton de Liz",
-            "Alessandro Pires",
-            "Kauan Miranda",
-            "Serginho Brugalli",
-            "Tiago Negri",
-            "Vinicios Candatten",
-            "Odair Antunes",
-            "Rodrigo Boff",
-            "Renan Fagundes",
-            "Marcio Ribeiro",
-            "Renan Tartari",
-            "Samuel Martins",
-            "Edson Rocker",
+            "Ederson Carvalho", "Bruno Severes", "Valdenor Sotoriva", "Leonardo Longo",
+            "Mateus Mattos", "Marcos Brandalize", "Guilherme Stujk", "Wellinton de Liz",
+            "Alessandro Pires", "Kauan Miranda", "Serginho Brugalli", "Tiago Negri",
+            "Vinicios Candatten", "Odair Antunes", "Rodrigo Boff", "Renan Fagundes",
+            "Marcio Ribeiro", "Renan Tartari", "Samuel Martins", "Edson Rocker",
             "Cleverson Polazzo"
         ];
 
@@ -396,15 +360,59 @@
         // Inicialização
         window.addEventListener('DOMContentLoaded', () => {
             loadStorage();
-            // Define o mês corrente por padrão no filtro
+            // Define a semana corrente por padrão no filtro
             const now = new Date();
-            const currentMonthStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
-            
-            const monthFilterEl = document.getElementById('month-filter');
-            if (monthFilterEl) monthFilterEl.value = currentMonthStr;
-
+            const currentWeekStr = getWeekString(now);
+            const weekFilterEl = document.getElementById('week-filter');
+            if (weekFilterEl) weekFilterEl.value = currentWeekStr;
             filterTechnicians();
         });
+
+        // Função auxiliar para retornar string de semana no formato YYYY-Www (ex: 2026-W39)
+        function getWeekString(d) {
+            d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+            d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+            const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+            const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+            return `${d.getUTCFullYear()}-W${String(weekNo).padStart(2, '0')}`;
+        }
+
+        // Retorna o intervalo de datas (Início e Fim) correspondente a uma string de semana YYYY-Www
+        function getWeekDates(weekStr) {
+            if (!weekStr) return { start: null, end: null };
+            const parts = weekStr.split('-W');
+            const year = parseInt(parts[0], 10);
+            const week = parseInt(parts[1], 10);
+            
+            const simple = new Date(year, 0, 1 + (week - 1) * 7);
+            const dow = simple.getDay();
+            const ISOweekStart = new Date(simple);
+            if (dow <= 4)
+                ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+            else
+                ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+            
+            const ISOweekEnd = new Date(ISOweekStart);
+            ISOweekEnd.setDate(ISOweekStart.getDate() + 6);
+            
+            return { start: ISOweekStart, end: ISOweekEnd };
+        }
+
+        function isDateInWeek(dateStr, weekStr) {
+            if (!dateStr || !weekStr) return false;
+            const recordDate = new Date(dateStr + 'T00:00:00');
+            const { start, end } = getWeekDates(weekStr);
+            if (!start || !end) return false;
+            return recordDate >= start && recordDate <= end;
+        }
+
+        function formatWeekName(weekStr) {
+            if (!weekStr) return '';
+            const { start, end } = getWeekDates(weekStr);
+            if (!start || !end) return weekStr;
+            const options = { day: '2-digit', month: '2-digit' };
+            return `Semana de ${start.toLocaleDateString('pt-BR', options)} a ${end.toLocaleDateString('pt-BR', options)}`;
+        }
 
         // Carrega dados salvos ou inicializa padrão em ordem alfabética
         function loadStorage() {
@@ -412,21 +420,13 @@
             const savedRecords = localStorage.getItem('gestao_ponto_records');
 
             if (savedTechs) {
-                try {
-                    technicians = JSON.parse(savedTechs);
-                } catch(e) {
-                    initDefaultTechs();
-                }
+                try { technicians = JSON.parse(savedTechs); } catch(e) { initDefaultTechs(); }
             } else {
                 initDefaultTechs();
             }
 
             if (savedRecords) {
-                try {
-                    pointRecords = JSON.parse(savedRecords);
-                } catch(e) {
-                    pointRecords = [];
-                }
+                try { pointRecords = JSON.parse(savedRecords); } catch(e) { pointRecords = []; }
             }
 
             sortTechniciansAlphabetically();
@@ -454,13 +454,13 @@
         }
 
         // Renderização da Tabela Principal
-        function renderCollaboratorsTable(filteredList = null, monthVal = '') {
+        function renderCollaboratorsTable(filteredList = null, weekVal = '') {
             const tbody = document.getElementById('tech-list');
             if (!tbody) return;
-
             tbody.innerHTML = '';
-            const listToRender = filteredList || technicians;
 
+            const listToRender = filteredList || technicians;
+            
             // Atualiza badge de quantidade
             const countBadge = document.getElementById('tech-count-badge');
             if (countBadge) countBadge.textContent = `${listToRender.length} técnico(s)`;
@@ -469,8 +469,7 @@
                 tbody.innerHTML = `
                     <tr>
                         <td colspan="4" class="p-8 text-center text-zinc-500 italic">
-                            <i class="fa-solid fa-user-slash text-2xl mb-2 block"></i>
-                            Nenhum colaborador encontrado.
+                            <i class="fa-solid fa-user-slash text-2xl mb-2 block"></i> Nenhum colaborador encontrado.
                         </td>
                     </tr>
                 `;
@@ -481,20 +480,20 @@
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-zinc-800/40 transition border-b border-zinc-800/40";
 
-                const techRecords = getFilteredObservations(tech.id, monthVal);
-                const monthInfoText = monthVal ? ` <span class="text-[10px] text-brand-400 font-mono">(${formatMonthName(monthVal)})</span>` : '';
-                
+                const techRecords = getFilteredObservations(tech.id, weekVal);
+                const weekInfoText = weekVal ? ` <span class="text-[10px] text-brand-400 font-mono">(${formatWeekName(weekVal)})</span>` : '';
                 let obsHtml = '';
+
                 if (techRecords.length > 0) {
                     obsHtml = `<div class="space-y-1.5 py-1">` + techRecords.map(r => `
                         <div class="text-xs border-b border-zinc-800/40 pb-1 last:border-0 last:pb-0">
-                            <span class="text-zinc-200 font-medium">${escapeHtml(r.obs)}</span> 
+                            <span class="text-zinc-200 font-medium">${escapeHtml(r.obs)}</span>
                             <span class="text-[10px] text-zinc-400 font-mono ml-1">(${formatDate(r.date)})</span>
                             <span class="text-[10px] text-brand-400 ml-1 font-semibold">[${escapeHtml(r.status)}]</span>
                         </div>
                     `).join('') + `</div>`;
                 } else {
-                    obsHtml = `<span class="text-zinc-600 italic">Sem ocorrências registradas${monthInfoText}</span>`;
+                    obsHtml = `<span class="text-zinc-600 italic">Sem ocorrências registradas${weekInfoText}</span>`;
                 }
 
                 tr.innerHTML = `
@@ -523,10 +522,10 @@
             });
         }
 
-        function getFilteredObservations(techId, monthVal = '') {
+        function getFilteredObservations(techId, weekVal = '') {
             let techRecords = pointRecords.filter(r => r.techId === techId && r.obs && r.obs.trim() !== '');
-            if (monthVal) {
-                techRecords = techRecords.filter(r => r.date && r.date.startsWith(monthVal));
+            if (weekVal) {
+                techRecords = techRecords.filter(r => r.date && isDateInWeek(r.date, weekVal));
             }
             techRecords.sort((a, b) => new Date(a.date) - new Date(b.date));
             return techRecords;
@@ -534,8 +533,7 @@
 
         function filterTechnicians() {
             const query = (document.getElementById('search-input')?.value || '').toLowerCase().trim();
-            const monthVal = document.getElementById('month-filter')?.value || '';
-
+            const weekVal = document.getElementById('week-filter')?.value || '';
             let filtered = technicians;
 
             if (query) {
@@ -545,17 +543,17 @@
                 );
             }
 
-            renderCollaboratorsTable(filtered, monthVal);
-            updateStats(monthVal);
+            renderCollaboratorsTable(filtered, weekVal);
+            updateStats(weekVal);
         }
 
-        function clearMonthFilter() {
-            const monthInput = document.getElementById('month-filter');
-            if (monthInput) monthInput.value = '';
+        function clearWeekFilter() {
+            const weekInput = document.getElementById('week-filter');
+            if (weekInput) weekInput.value = '';
             filterTechnicians();
         }
 
-        function updateStats(monthVal = '') {
+        function updateStats(weekVal = '') {
             const totalTechsEl = document.getElementById('total-techs');
             const totalOccurrencesEl = document.getElementById('total-occurrences');
             const occurrencesCardLabel = document.getElementById('occurrences-card-label');
@@ -563,166 +561,41 @@
             if (totalTechsEl) totalTechsEl.textContent = technicians.length;
 
             let filteredRecords = pointRecords;
-            if (monthVal) {
-                filteredRecords = pointRecords.filter(r => r.date && r.date.startsWith(monthVal));
-                if (occurrencesCardLabel) occurrencesCardLabel.textContent = `Ocorrências em ${formatMonthName(monthVal)}`;
+            if (weekVal) {
+                filteredRecords = pointRecords.filter(r => r.date && isDateInWeek(r.date, weekVal));
+                if (occurrencesCardLabel) occurrencesCardLabel.textContent = `Ocorrências na ${formatWeekName(weekVal)}`;
             } else {
-                if (occurrencesCardLabel) occurrencesCardLabel.textContent = `Ocorrências Registradas (Total)`;
+                if (occurrencesCardLabel) occurrencesCardLabel.textContent = `Ocorrências / Divergências Registradas`;
             }
 
             if (totalOccurrencesEl) totalOccurrencesEl.textContent = filteredRecords.length;
         }
 
-        // Relatório Mensal
-        function openModalMonthlyReport() {
-            const modal = document.getElementById('modal-monthly-report');
-            const monthSelect = document.getElementById('report-month-select');
-            
-            // Define o valor inicial igual ao filtro ativo ou mês atual
-            const activeMonthFilter = document.getElementById('month-filter')?.value;
-            const now = new Date();
-            const currentMonthStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
-
-            if (monthSelect) {
-                monthSelect.value = activeMonthFilter || currentMonthStr;
-            }
-
-            renderMonthlyReport();
-            if (modal) modal.classList.remove('hidden');
-        }
-
-        function closeModalMonthlyReport() {
-            const modal = document.getElementById('modal-monthly-report');
-            if (modal) modal.classList.add('hidden');
-        }
-
-        function renderMonthlyReport() {
-            const container = document.getElementById('monthly-report-content');
-            const monthSelect = document.getElementById('report-month-select');
-            const badge = document.getElementById('report-total-badge');
-
-            if (!container || !monthSelect) return;
-
-            const selectedMonth = monthSelect.value;
-            if (!selectedMonth) {
-                container.innerHTML = `<p class="text-center text-zinc-500 py-8">Selecione um mês para visualizar o relatório.</p>`;
-                if (badge) badge.textContent = `0 Ocorrências`;
-                return;
-            }
-
-            const monthRecords = pointRecords.filter(r => r.date && r.date.startsWith(selectedMonth));
-            if (badge) badge.textContent = `${monthRecords.length} Ocorrência(s) em ${formatMonthName(selectedMonth)}`;
-
-            if (monthRecords.length === 0) {
-                container.innerHTML = `
-                    <div class="p-8 text-center text-zinc-500 bg-zinc-950 border border-zinc-800 rounded-xl">
-                        <i class="fa-solid fa-calendar-xmark text-3xl mb-2 text-zinc-600 block"></i>
-                        Nenhuma ocorrência registrada para o mês de <strong class="text-zinc-300">${formatMonthName(selectedMonth)}</strong>.
-                    </div>
-                `;
-                return;
-            }
-
-            // Agrupa ocorrências por colaborador
-            let html = `<div class="space-y-4">`;
-
-            technicians.forEach(tech => {
-                const techMonthRecords = monthRecords.filter(r => r.techId === tech.id);
-                if (techMonthRecords.length > 0) {
-                    techMonthRecords.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-                    html += `
-                        <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 space-y-2">
-                            <div class="flex items-center justify-between border-b border-zinc-800 pb-2">
-                                <div>
-                                    <h4 class="font-bold text-sm text-white">${escapeHtml(tech.name)}</h4>
-                                    <span class="text-[10px] text-zinc-400">${escapeHtml(tech.cargo || 'Técnico de Campo')}</span>
-                                </div>
-                                <span class="px-2.5 py-0.5 text-[11px] bg-brand-950 text-brand-300 border border-brand-800 rounded-full font-semibold">
-                                    ${techMonthRecords.length} ocorrência(s)
-                                </span>
-                            </div>
-
-                            <div class="space-y-1.5 pt-1">
-                                ${techMonthRecords.map(r => {
-                                    let badgeClass = 'bg-zinc-800 text-zinc-300 border-zinc-700';
-                                    if (r.status.includes('fora da cerca')) badgeClass = 'bg-brand-950 text-brand-300 border-brand-800';
-                                    if (r.status.includes('divergência')) badgeClass = 'bg-amber-950 text-amber-300 border-amber-800';
-
-                                    return `
-                                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs bg-zinc-900/60 p-2 rounded-lg border border-zinc-800/50">
-                                            <div class="flex items-center gap-2">
-                                                <span class="font-mono text-zinc-400 font-semibold">${formatDate(r.date)}:</span>
-                                                <span class="text-zinc-200">${escapeHtml(r.obs)}</span>
-                                            </div>
-                                            <span class="px-2 py-0.5 text-[10px] font-bold border rounded ${badgeClass} self-start sm:self-auto">
-                                                ${escapeHtml(r.status)}
-                                            </span>
-                                        </div>
-                                    `;
-                                }).join('')}
-                            </div>
-                        </div>
-                    `;
-                }
-            });
-
-            html += `</div>`;
-            container.innerHTML = html;
-        }
-
-        function printMonthlyReport() {
-            const monthSelect = document.getElementById('report-month-select');
-            if (monthSelect && monthSelect.value) {
-                const monthInput = document.getElementById('month-filter');
-                if (monthInput) monthInput.value = monthSelect.value;
-                filterTechnicians();
-            }
-            closeModalMonthlyReport();
-            setTimeout(() => {
-                window.print();
-            }, 300);
-        }
-
-        function formatMonthName(monthStr) {
-            if (!monthStr || !monthStr.includes('-')) return monthStr;
-            const [year, month] = monthStr.split('-');
-            const months = [
-                'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-                'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-            ];
-            const monthIdx = parseInt(month, 10) - 1;
-            return `${months[monthIdx] || month}/${year}`;
-        }
-
-        // Funções de Modal Colaborador
+        // Modais de Técnico
         function openModalTechnician(techId = null) {
             const modal = document.getElementById('modal-technician');
+            const titleEl = document.getElementById('modal-tech-title');
             const form = document.getElementById('form-technician');
-            const title = document.getElementById('modal-tech-title');
-
-            if (!modal || !form) return;
             form.reset();
+            document.getElementById('tech-id').value = '';
 
             if (techId) {
                 const tech = technicians.find(t => t.id === techId);
                 if (tech) {
+                    titleEl.innerHTML = `<i class="fa-solid fa-user-pen text-brand-500"></i> Editar Colaborador`;
                     document.getElementById('tech-id').value = tech.id;
                     document.getElementById('tech-name').value = tech.name;
                     document.getElementById('tech-cargo').value = tech.cargo || 'Técnico de Campo';
-                    if (title) title.innerHTML = `<i class="fa-solid fa-user-pen text-brand-500"></i> Editar Colaborador`;
                 }
             } else {
-                document.getElementById('tech-id').value = '';
-                if (title) title.innerHTML = `<i class="fa-solid fa-user-plus text-brand-500"></i> Novo Colaborador`;
+                titleEl.innerHTML = `<i class="fa-solid fa-user-plus text-brand-500"></i> Novo Colaborador`;
             }
 
             modal.classList.remove('hidden');
         }
 
         function closeModalTechnician() {
-            const modal = document.getElementById('modal-technician');
-            if (modal) modal.classList.add('hidden');
+            document.getElementById('modal-technician').classList.add('hidden');
         }
 
         function saveTechnician(e) {
@@ -734,29 +607,26 @@
             if (!name) return;
 
             if (id) {
-                // Editar
                 const tech = technicians.find(t => t.id === id);
                 if (tech) {
                     tech.name = name;
                     tech.cargo = cargo;
-                    showToast("Colaborador atualizado com sucesso!", "success");
+                    showToast('Colaborador atualizado com sucesso!', 'success');
                 }
             } else {
-                // Adicionar
                 const newTech = {
                     id: 'tech_' + Date.now(),
-                    name,
-                    cargo
+                    name: name,
+                    cargo: cargo
                 };
                 technicians.push(newTech);
-                showToast("Colaborador cadastrado com sucesso!", "success");
+                showToast('Colaborador cadastrado com sucesso!', 'success');
             }
 
             sortTechniciansAlphabetically();
             saveTechsStorage();
             closeModalTechnician();
-            renderCollaboratorsTable();
-            updateStats();
+            filterTechnicians();
         }
 
         function deleteTechnician(techId) {
@@ -766,158 +636,312 @@
             if (confirm(`Tem certeza que deseja excluir o colaborador "${tech.name}" e todas as suas ocorrências?`)) {
                 technicians = technicians.filter(t => t.id !== techId);
                 pointRecords = pointRecords.filter(r => r.techId !== techId);
-                
-                sortTechniciansAlphabetically();
                 saveTechsStorage();
                 saveRecordsStorage();
-                renderCollaboratorsTable();
-                updateStats();
-                showToast("Colaborador excluído com sucesso.", "info");
+                filterTechnicians();
+                showToast('Colaborador excluído com sucesso.', 'success');
             }
         }
 
-        // Funções de Modal Ocorrência / Ponto
-        function populateTechSelect() {
-            const select = document.getElementById('record-tech-id');
-            if (!select) return;
-
-            select.innerHTML = technicians.map(t => `<option value="${t.id}">${escapeHtml(t.name)}</option>`).join('');
+        // Modais de Ocorrências
+        function quickRecordPoint(techId) {
+            openModalPointRecord(techId);
         }
 
-        function openModalPointRecord() {
-            populateTechSelect();
+        function openModalPointRecord(techId = null) {
             const modal = document.getElementById('modal-point');
             const form = document.getElementById('form-point');
-            if (!modal || !form) return;
-
             form.reset();
             document.getElementById('record-id').value = '';
 
-            const now = new Date();
-            document.getElementById('record-date').value = now.toISOString().split('T')[0];
+            const selectTech = document.getElementById('record-tech-id');
+            selectTech.innerHTML = '';
+            technicians.forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = t.id;
+                opt.textContent = t.name;
+                selectTech.appendChild(opt);
+            });
+
+            if (techId) {
+                selectTech.value = techId;
+            }
+
+            // Data de hoje por padrão
+            const todayStr = new Date().toISOString().split('T')[0];
+            document.getElementById('record-date').value = todayStr;
 
             modal.classList.remove('hidden');
         }
 
-        function quickRecordPoint(techId) {
-            openModalPointRecord();
-            const select = document.getElementById('record-tech-id');
-            if (select) select.value = techId;
-        }
-
         function closeModalPointRecord() {
-            const modal = document.getElementById('modal-point');
-            if (modal) modal.classList.add('hidden');
-        }
-
-        function togglePresetTags() {
-            // Função para extensões futuras de troca de status
+            document.getElementById('modal-point').classList.add('hidden');
         }
 
         function setPresetObs(text) {
-            const obsField = document.getElementById('record-obs');
-            if (obsField) {
-                obsField.value = text;
+            const obsEl = document.getElementById('record-obs');
+            if (obsEl) {
+                obsEl.value = text;
+                obsEl.focus();
             }
+        }
+
+        function togglePresetTags() {
+            // Placeholder para manipulação customizada de tags se necessário
         }
 
         function savePointRecord(e) {
             e.preventDefault();
+            const id = document.getElementById('record-id').value;
             const techId = document.getElementById('record-tech-id').value;
             const date = document.getElementById('record-date').value;
             const status = document.getElementById('record-status').value;
             const obs = document.getElementById('record-obs').value.trim();
 
-            if (!techId || !date || !obs) {
-                showToast("Preencha todos os campos obrigatórios.", "warning");
-                return;
+            if (!techId || !date || !obs) return;
+
+            if (id) {
+                const record = pointRecords.find(r => r.id === id);
+                if (record) {
+                    record.techId = techId;
+                    record.date = date;
+                    record.status = status;
+                    record.obs = obs;
+                    showToast('Registro atualizado com sucesso!', 'success');
+                }
+            } else {
+                const newRecord = {
+                    id: 'rec_' + Date.now(),
+                    techId: techId,
+                    date: date,
+                    status: status,
+                    obs: obs
+                };
+                pointRecords.push(newRecord);
+                showToast('Ocorrência registrada com sucesso!', 'success');
             }
 
-            const newRecord = {
-                id: 'rec_' + Date.now(),
-                techId,
-                date,
-                status,
-                obs
-            };
-
-            pointRecords.unshift(newRecord);
             saveRecordsStorage();
             closeModalPointRecord();
-
-            // Atualiza o filtro de mês para corresponder ao mês do registro salvo
-            const recordMonth = date.substring(0, 7);
-            const monthFilterEl = document.getElementById('month-filter');
-            if (monthFilterEl) monthFilterEl.value = recordMonth;
-
             filterTechnicians();
-            showToast("Ocorrência salva com sucesso!", "success");
         }
 
-        // Modal Histórico
+        // Histórico de Ocorrências do Colaborador
         function viewHistory(techId) {
             const tech = technicians.find(t => t.id === techId);
             if (!tech) return;
 
-            const nameEl = document.getElementById('history-tech-name');
-            if (nameEl) nameEl.textContent = `${tech.name} (${tech.cargo || 'Técnico de Campo'})`;
-
+            document.getElementById('history-tech-name').textContent = `${tech.name} - ${tech.cargo || 'Técnico de Campo'}`;
             const tbody = document.getElementById('history-table-body');
-            if (!tbody) return;
             tbody.innerHTML = '';
 
             const techRecords = pointRecords.filter(r => r.techId === techId);
             techRecords.sort((a, b) => new Date(b.date) - new Date(a.date));
 
             if (techRecords.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-zinc-500 italic">Sem ocorrências ou motivos salvos para este colaborador.</td></tr>`;
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="p-6 text-center text-zinc-500 italic">Nenhum registro encontrado para este técnico.</td>
+                    </tr>
+                `;
             } else {
                 techRecords.forEach(r => {
-                    let badge = '<span class="px-2 py-0.5 text-[10px] font-bold bg-zinc-800 text-zinc-300 rounded border border-zinc-700">Normal</span>';
-                    if (r.status.includes('fora da cerca')) badge = '<span class="px-2 py-0.5 text-[10px] font-bold bg-brand-950 text-brand-400 border border-brand-800 rounded">Fora da Cerca</span>';
-                    if (r.status.includes('divergência')) badge = '<span class="px-2 py-0.5 text-[10px] font-bold bg-amber-950 text-amber-400 border border-amber-800 rounded">Divergência</span>';
-
                     const tr = document.createElement('tr');
-                    tr.className = "hover:bg-zinc-800/40";
+                    tr.className = "hover:bg-zinc-800/40 transition border-b border-zinc-800/40";
                     tr.innerHTML = `
-                        <td class="p-2.5 font-mono text-zinc-300">${formatDate(r.date)}</td>
-                        <td class="p-2.5 text-center">${badge}</td>
-                        <td class="p-2.5 text-zinc-200">${escapeHtml(r.obs || '-')}</td>
-                        <td class="p-2.5 text-center">
-                            <button onclick="deleteRecord('${r.id}', '${techId}')" class="text-red-500 hover:text-red-400 p-1" title="Excluir Ocorrência">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
+                        <td class="p-2 font-mono text-zinc-300">${formatDate(r.date)}</td>
+                        <td class="p-2 text-center"><span class="px-2 py-0.5 text-[10px] bg-brand-950 text-brand-300 border border-brand-800/60 rounded-full font-semibold">${escapeHtml(r.status)}</span></td>
+                        <td class="p-2 text-zinc-200">${escapeHtml(r.obs)}</td>
+                        <td class="p-2 text-center">
+                            <button onclick="deleteRecord('${r.id}', '${techId}')" title="Excluir" class="text-red-500 hover:text-red-400 p-1"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     `;
                     tbody.appendChild(tr);
                 });
             }
 
-            const modal = document.getElementById('modal-history');
-            if (modal) modal.classList.remove('hidden');
+            document.getElementById('modal-history').classList.remove('hidden');
         }
 
         function closeModalHistory() {
-            const modal = document.getElementById('modal-history');
-            if (modal) modal.classList.add('hidden');
+            document.getElementById('modal-history').classList.add('hidden');
         }
 
-        function deleteRecord(recId, techId) {
-            pointRecords = pointRecords.filter(r => r.id !== recId);
-            saveRecordsStorage();
-            viewHistory(techId);
-            renderCollaboratorsTable();
-            updateStats();
-            showToast("Registro removido.", "info");
+        function deleteRecord(recordId, techId) {
+            if (confirm('Deseja realmente excluir este registro de ocorrência?')) {
+                pointRecords = pointRecords.filter(r => r.id !== recordId);
+                saveRecordsStorage();
+                filterTechnicians();
+                viewHistory(techId);
+                showToast('Registro excluído.', 'success');
+            }
         }
 
-        // Utilitários
+        // Relatório Semanal
+        function openModalWeeklyReport() {
+            const modal = document.getElementById('modal-weekly-report');
+            const weekSelect = document.getElementById('report-week-select');
+            
+            const now = new Date();
+            weekSelect.value = getWeekString(now);
+
+            renderWeeklyReport();
+            modal.classList.remove('hidden');
+        }
+
+        function closeModalWeeklyReport() {
+            document.getElementById('modal-weekly-report').classList.add('hidden');
+        }
+
+        function renderWeeklyReport() {
+            const weekVal = document.getElementById('report-week-select').value;
+            const container = document.getElementById('weekly-report-content');
+            const badge = document.getElementById('report-total-badge');
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            if (!weekVal) {
+                container.innerHTML = `<p class="text-center text-zinc-500 py-6">Selecione uma semana válida.</p>`;
+                if (badge) badge.textContent = `0 Ocorrências`;
+                return;
+            }
+
+            const weekRecords = pointRecords.filter(r => r.date && isDateInWeek(r.date, weekVal) && r.obs && r.obs.trim() !== '');
+            if (badge) badge.textContent = `${weekRecords.length} Ocorrência(s)`;
+
+            if (weekRecords.length === 0) {
+                container.innerHTML = `
+                    <div class="p-8 text-center text-zinc-500 italic bg-zinc-950/40 rounded-xl border border-zinc-800">
+                        <i class="fa-solid fa-clipboard-check text-3xl mb-2 text-zinc-600"></i>
+                        <p>Nenhuma ocorrência registrada nesta semana (${formatWeekName(weekVal)}).</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Agrupa por técnico
+            const grouped = {};
+            weekRecords.forEach(r => {
+                if (!grouped[r.techId]) grouped[r.techId] = [];
+                grouped[r.techId].push(r);
+            });
+
+            let html = `
+                <div class="space-y-4">
+                    <div class="text-xs text-zinc-400 font-medium px-1">
+                        Relatório referente à <span class="text-white font-semibold">${formatWeekName(weekVal)}</span> — Total de ${weekRecords.length} ocorrência(s) em ${Object.keys(grouped).length} colaborador(es).
+                    </div>
+            `;
+
+            Object.keys(grouped).forEach(techId => {
+                const tech = technicians.find(t => t.id === techId);
+                const techName = tech ? tech.name : 'Técnico Removido';
+                const techCargo = tech ? (tech.cargo || 'Técnico de Campo') : '';
+                const records = grouped[techId];
+
+                html += `
+                    <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-4 space-y-2">
+                        <div class="flex items-center justify-between border-b border-zinc-800/80 pb-2">
+                            <div>
+                                <h4 class="font-bold text-sm text-white">${escapeHtml(techName)}</h4>
+                                <p class="text-[11px] text-zinc-400">${escapeHtml(techCargo)}</p>
+                            </div>
+                            <span class="px-2.5 py-0.5 text-xs bg-brand-950 text-brand-300 border border-brand-800/60 rounded-full font-mono">${records.length} ocorrência(s)</span>
+                        </div>
+                        <ul class="space-y-1.5 pt-1">
+                `;
+
+                records.forEach(r => {
+                    html += `
+                        <li class="text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-1 bg-zinc-900/60 p-2 rounded-lg border border-zinc-800/60">
+                            <div>
+                                <span class="text-zinc-200 font-medium">${escapeHtml(r.obs)}</span>
+                                <span class="text-[10px] text-brand-400 ml-2 font-semibold">[${escapeHtml(r.status)}]</span>
+                            </div>
+                            <span class="text-[11px] text-zinc-400 font-mono whitespace-nowrap"><i class="fa-regular fa-calendar mr-1"></i>${formatDate(r.date)}</span>
+                        </li>
+                    `;
+                });
+
+                html += `
+                        </ul>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        function printWeeklyReport() {
+            const weekVal = document.getElementById('report-week-select').value;
+            if (!weekVal) return;
+
+            const weekRecords = pointRecords.filter(r => r.date && isDateInWeek(r.date, weekVal) && r.obs && r.obs.trim() !== '');
+            const weekTitle = formatWeekName(weekVal);
+
+            let printContent = `
+                <div style="font-family: Inter, sans-serif; padding: 20px; color: #000;">
+                    <h2 style="margin-bottom: 5px;">Relatório Semanal de Ocorrências e Divergências de Ponto</h2>
+                    <p style="color: #555; font-size: 14px; margin-bottom: 20px;">Referência: <strong>${weekTitle}</strong></p>
+            `;
+
+            if (weekRecords.length === 0) {
+                printContent += `<p style="font-style: italic; color: #666;">Nenhuma ocorrência registrada nesta semana.</p>`;
+            } else {
+                const grouped = {};
+                weekRecords.forEach(r => {
+                    if (!grouped[r.techId]) grouped[r.techId] = [];
+                    grouped[r.techId].push(r);
+                });
+
+                printContent += `<table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+                    <thead>
+                        <tr style="background: #f4f4f5; text-align: left;">
+                            <th style="border: 1px solid #d4d4d8; padding: 8px;">Colaborador</th>
+                            <th style="border: 1px solid #d4d4d8; padding: 8px; text-align: center;">Data</th>
+                            <th style="border: 1px solid #d4d4d8; padding: 8px;">Situação</th>
+                            <th style="border: 1px solid #d4d4d8; padding: 8px;">Observação / Motivo</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+
+                Object.keys(grouped).forEach(techId => {
+                    const tech = technicians.find(t => t.id === techId);
+                    const techName = tech ? tech.name : 'Técnico Removido';
+                    grouped[techId].forEach(r => {
+                        printContent += `
+                            <tr>
+                                <td style="border: 1px solid #d4d4d8; padding: 8px; font-weight: bold;">${escapeHtml(techName)}</td>
+                                <td style="border: 1px solid #d4d4d8; padding: 8px; text-align: center; white-space: nowrap;">${formatDate(r.date)}</td>
+                                <td style="border: 1px solid #d4d4d8; padding: 8px;">${escapeHtml(r.status)}</td>
+                                <td style="border: 1px solid #d4d4d8; padding: 8px;">${escapeHtml(r.obs)}</td>
+                            </tr>
+                        `;
+                    });
+                });
+
+                printContent += `</tbody></table>`;
+            }
+
+            printContent += `</div>`;
+
+            const originalBody = document.body.innerHTML;
+            document.body.innerHTML = printContent;
+            window.print();
+            document.body.innerHTML = originalBody;
+            window.location.reload();
+        }
+
+        // Impressão Geral da Tela
         function printReport() {
             window.print();
         }
 
+        // Funções Utilitárias
         function formatDate(dateStr) {
-            if (!dateStr) return '-';
+            if (!dateStr) return '';
             const parts = dateStr.split('-');
             if (parts.length === 3) {
                 return `${parts[2]}/${parts[1]}/${parts[0]}`;
@@ -925,36 +949,39 @@
             return dateStr;
         }
 
-        function escapeHtml(str) {
-            if (!str) return '';
-            return str.replace(/&/g, "&amp;")
-                      .replace(/</g, "&lt;")
-                      .replace(/>/g, "&gt;")
-                      .replace(/"/g, "&quot;")
-                      .replace(/'/g, "&#039;");
+        function formatMonthName(monthVal) {
+            if (!monthVal) return '';
+            const parts = monthVal.split('-');
+            const year = parts[0];
+            const month = parseInt(parts[1], 10);
+            const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+            return `${months[month - 1]} de ${year}`;
         }
 
-        function showToast(msg, type = "success") {
+        function escapeHtml(text) {
+            if (!text) return '';
+            return text.replace('&', '&amp;')
+                       .replace('<', '&lt;')
+                       .replace('>', '&gt;')
+                       .replace('"', '&quot;')
+                       .replace("'", '&#039;');
+        }
+
+        function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
-            const icon = document.getElementById('toast-icon');
-            const message = document.getElementById('toast-message');
+            const toastMessage = document.getElementById('toast-message');
+            const toastIcon = document.getElementById('toast-icon');
 
-            if (!toast || !icon || !message) return;
-
-            message.textContent = msg;
-
+            toastMessage.textContent = message;
             if (type === 'success') {
-                icon.className = "fa-solid fa-circle-check text-base text-brand-500";
-            } else if (type === 'warning') {
-                icon.className = "fa-solid fa-triangle-exclamation text-base text-amber-500";
+                toastIcon.className = 'fa-solid fa-circle-check text-base text-brand-500';
             } else {
-                icon.className = "fa-solid fa-circle-info text-base text-zinc-400";
+                toastIcon.className = 'fa-solid fa-triangle-exclamation text-base text-amber-500';
             }
 
-            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
-
+            toast.classList.remove('translate-y-20', 'opacity-0');
             setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+                toast.classList.add('translate-y-20', 'opacity-0');
             }, 3000);
         }
     </script>
